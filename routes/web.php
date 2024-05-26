@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\OAuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +20,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/auth/passport', [OAuthController::class, 'redirect'])->name('oauth.passport');
+Route::get('/auth/passport/callback', [OAuthController::class, 'callback']);
+Route::get('/auth/passport/refresh', [OAuthController::class, 'refresh']);
